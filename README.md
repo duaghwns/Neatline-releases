@@ -8,7 +8,7 @@ Neatline은 macOS용 정리 도구예요. 어디에 용량이 쓰이는지 버�
 
 ## 설치
 
-터미널에 한 줄만 붙여 넣으세요. 업데이트할 때도 같은 명령이에요.
+터미널에 한 줄만 붙여 넣으세요.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/duaghwns/Neatline-releases/main/install.sh | bash
@@ -17,6 +17,7 @@ curl -fsSL https://raw.githubusercontent.com/duaghwns/Neatline-releases/main/ins
 또는 **[최신 릴리즈](https://github.com/duaghwns/Neatline-releases/releases/latest)** 에서 `Neatline.dmg` 를 내려받아 응용 프로그램 폴더로 끌어 놓으세요.
 DMG로 설치하면 처음 열 때 "확인할 수 없는 개발자" 경고가 뜰 수 있어요 → **시스템 설정 › 개인정보 보호 및 보안** 아래쪽의 **그래도 열기**를 누르세요. (한 줄 설치는 이 경고가 뜨지 않아요.)
 
+- **업데이트는 앱이 알아서**: 새 버전이 나오면 백그라운드에서 받아 두고 알려 줘요. 메뉴바나 설정의 **다시 시작**만 누르면 돼요 (1.0.1부터)
 - macOS 14 (Sonoma) 이상 · Apple 실리콘 / 인텔 모두 지원
 - 처음 실행하면 **설정 › 권한**에서 '전체 디스크 접근'을 켜 두면 폴더마다 권한을 묻지 않아요
 
