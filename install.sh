@@ -16,9 +16,15 @@ if [ "$MAJOR" -lt 14 ]; then
     exit 1
 fi
 
-# 응용 프로그램 폴더에 쓸 수 없으면 내 계정의 응용 프로그램 폴더로
-DEST="/Applications"
-if [ ! -w "$DEST" ]; then
+# 이미 설치돼 있으면 그 자리에서 업데이트한다 (두 군데에 따로 깔리지 않게).
+# 처음이면 응용 프로그램 폴더, 거기에 쓸 수 없으면 내 계정의 응용 프로그램 폴더로
+if [ -d "/Applications/Neatline.app" ] && [ -w "/Applications" ]; then
+    DEST="/Applications"
+elif [ -d "$HOME/Applications/Neatline.app" ]; then
+    DEST="$HOME/Applications"
+elif [ -w "/Applications" ]; then
+    DEST="/Applications"
+else
     DEST="$HOME/Applications"
     mkdir -p "$DEST"
 fi
@@ -52,6 +58,10 @@ if ! ditto "$TMP/Neatline.app" "$DEST/Neatline.app"; then
 fi
 # 인터넷에서 받은 앱 표시를 지워서 처음 열 때 막히지 않게 한다
 xattr -dr com.apple.quarantine "$DEST/Neatline.app" 2>/dev/null || true
+# 이전 버전은 지우지 않고 휴지통으로 (임시 폴더와 함께 사라지지 않게)
+if [ -d "$TMP/Neatline-old.app" ]; then
+    mv "$TMP/Neatline-old.app" "$HOME/.Trash/Neatline 이전 버전 $(date +%Y%m%d-%H%M%S).app" 2>/dev/null || true
+fi
 
 VER=$(defaults read "$DEST/Neatline.app/Contents/Info" CFBundleShortVersionString 2>/dev/null || echo "")
 echo "✅ Neatline $VER 설치 완료: $DEST/Neatline.app"
